@@ -5,6 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import com.mysql.cj.jdbc.Driver;
 
 
@@ -14,25 +18,22 @@ import com.mysql.cj.jdbc.Driver;
 public class App {
     public static void main(String[] args) {
       
-    	System.out.println("Add dependency of MySQL Using Maven Tool ... !!!");
+    	Information information = new Information();
+    	information.setId(4);
+    	information.setName("yash");
+    	information.setMobile("1234567890");
     	
-    	try {
-			
-    		Driver driver = new com.mysql.cj.jdbc.Driver();
-			DriverManager.registerDriver(driver);
-			
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assigmentdb","root","2345");
-			
-			Statement statement = connection.createStatement();
-			statement.executeUpdate("INSERT INTO information VALUES(1,'yogesh','1234567890')");
-			
-			connection.close();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	Configuration configuration = new Configuration();
+    	configuration.configure();
+    	configuration.addAnnotatedClass(Information.class);
     	
+    	SessionFactory sessionFactory = configuration.buildSessionFactory();
+    	
+    	Session session = sessionFactory.openSession();
+    	session.beginTransaction();
+    	session.save(information);
+    	session.getTransaction().commit();
+    	session.close();
     	
     }
 }
