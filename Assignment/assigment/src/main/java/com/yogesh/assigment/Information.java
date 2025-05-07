@@ -31,5 +31,10 @@ public class Information {
 	public void setMobile(String mobile) {
 		this.mobileNo = mobile;
 	}
+	@Override
+	public String toString() {
+		return "Information [id=" + id + ", name=" + name + ", mobileNo=" + mobileNo + "]";
+	}
+	
 	
 }
