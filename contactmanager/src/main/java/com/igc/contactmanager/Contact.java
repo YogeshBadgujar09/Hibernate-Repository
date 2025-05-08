@@ -1,6 +1,8 @@
 package com.igc.contactmanager;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -8,6 +10,7 @@ import jakarta.persistence.Table;
 @Table(name="contact")
 public class Contact {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	String name;
 	String mobno;
@@ -36,4 +39,10 @@ public class Contact {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	@Override
+	public String toString() {
+		return "Contact [id=" + id + ", name=" + name + ", mobno=" + mobno + ", email=" + email + "]";
+	}
+	
+	
 }
