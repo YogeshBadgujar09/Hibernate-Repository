@@ -4,18 +4,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.igc.contactmanager.util.HibernateUtil;
+
 public class UpdateContact {
 
 	public static void main(String[] args) {
 		Contact contact = null;
 		
-		Configuration configuration = new Configuration();
-		configuration.configure();
-		configuration.addAnnotatedClass(Contact.class);
-		configuration.addAnnotatedClass(AddressBook.class);
-		SessionFactory sessionFactory = configuration.buildSessionFactory();
-		
-		Session session = sessionFactory.openSession();
+		Session session = HibernateUtil.getSessionFactoryInstance().openSession();
 		
 		contact = session.get(Contact.class, 2);
 		
